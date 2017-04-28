@@ -1,0 +1,27 @@
+---
+- hosts: elk
+  become: yes
+  tasks:
+   - name: Update repo for java
+     apt_repository:
+       repo: deb http://ppa.launchpad.net/webupd8team/java/ubuntu trusty main
+       state: present
+       filename: 'webupd8team-java-trusty'
+
+   - name: update repo
+     apt: name=debconf-utils state=present update_cache=yes
+
+   - name: check
+     action: shell echo "oracle-java8-installer shared/accepted-oracle-license-v1-1 select true" | sudo debconf-set-selections
+
+   - name: Update and install java8 on server
+     apt: name="oracle-java8-installer" state=present force=yes
+ 
+   - name: Import the Elasticsearch public GPG key into apt
+     action: shell wget -qO - https://artifacts.elastic.co/GPG-KEY-elasticsearch | sudo apt-key add -
+   
+   - name: Update repo for elastic search
+     apt_repository:
+       repo: deb https://artifacts.elastic.co/packages/5.x/apt stable main
+       state: present
+       filename: 'elastic-5.x'

@@ -1,0 +1,5 @@
+---
+  - hosts: elasticserver
+    become: yes
+    roles:
+      - roles/elasticsearch

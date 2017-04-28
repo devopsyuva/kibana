@@ -1,0 +1,12 @@
+---
+# tasks file for elasticsearch
+   - name: update the repo and install elastic search
+     apt: name=elasticsearch state=present
+
+   - name: update the elastic config file
+     lineinfile:
+       path: /etc/elasticsearch/elasticsearch.yml
+       #regexp: '^#network.host:'
+       #insertafter: '# Set the bind address to a specific'
+       line: 'network.host: {{ host_ipaddress }}'
+     notify: restart elasticsearch service

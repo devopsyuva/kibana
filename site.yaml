@@ -1,0 +1,4 @@
+---
+  - include: playbooks/deploy_basic.yaml
+  - include: playbooks/deploy_elastic.yaml
+  - include: playbooks/deploy_kibana.yaml

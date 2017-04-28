@@ -1,0 +1,48 @@
+##### Install and configure ELK/kibana on Ubuntu 14.04 server #####
+
+1) Install Ubuntu 14.04 server edition.
+
+Tree view of ansible playbook for ELK deployment:
++++++++++++++++++++++++++++++++++++++++++++++++++
+
+.
+├── ansible.cfg
+├── group_vars
+│   └── all
+├── hosts
+├── playbooks
+│   ├── deploy_basic.yaml
+│   ├── deploy_elastic.yaml
+│   └── deploy_kibana.yaml
+├── roles
+│   ├── elasticsearch
+│   │   ├── handlers
+│   │   │   └── main.yml
+│   │   └── tasks
+│   │       └── main.yml
+│   └── kibana
+│       ├── handlers
+│       │   └── main.yml
+│       └── tasks
+│           └── main.yml
+└── site.yaml
+
+9 directories, 11 files
+
+How to execute the playbook on Ubuntu server 14.04:
++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+1) Download the code from the github account.
+2) Move the playbook file under /etc/ansible location. Since parameters are set accordingly in ansible.cfg file.
+3) Copy the public key to the remote server where you want to install the ELK.
+4) Modify the parameter "interface_name" in all file under group_vars directory.
+               ansible_interfaces[1] ---> This value can be set from the setup module which will show the total number of interfaces and set accordingly.
+5) Now run the playbook, ansible-playbook site.yaml
+
++++
+  - include: playbooks/deploy_basic.yaml
+  - include: playbooks/deploy_elastic.yaml
+  - include: playbooks/deploy_kibana.yaml
++++
+
+Note: Drop an email if you face any issues "dubareddy.383@gmail.com" inbox.

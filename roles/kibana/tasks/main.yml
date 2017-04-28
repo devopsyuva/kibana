@@ -1,0 +1,15 @@
+---
+# tasks file for kibana
+  - name: Install kibana packages
+    apt: name=kibana state=present force=yes
+
+  - name: update kibana config file
+    lineinfile:
+      path: /etc/kibana/kibana.yml
+      line: 'server.host: {{ host_ipaddress }}'
+
+  - name: update config file of kibana
+    lineinfile:
+      path: /etc/kibana/kibana.yml
+      line: 'elasticsearch.url: "http://{{ host_ipaddress }}:9200"'
+    notify: restart kibana service
