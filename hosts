@@ -3,7 +3,7 @@ kibana
 elasticserver
 
 [kibana]
-kibanatestserver	ansible_host=192.168.57.101
+localhost	ansible_host=127.0.0.1
 
 [elasticserver]
-kibanatestserver	ansible_host=192.168.57.101
+localhost	ansible_host=127.0.0.1
