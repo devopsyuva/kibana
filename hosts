@@ -3,7 +3,13 @@ kibana
 elasticserver
 
 [kibana]
-localhost	ansible_host=127.0.0.1
+localhost
 
 [elasticserver]
-localhost	ansible_host=127.0.0.1
+localhost
+
+[elk:vars]
+ansible_host=127.0.0.1
+ansible_user=root
+ansible_ssh_pass=test123
+ansible_connection=local
